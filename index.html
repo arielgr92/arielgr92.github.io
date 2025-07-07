@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glass UI Website</title>
+  <style>
+    /* Full screen background image */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://cdn.pixabay.com/photo/2017/08/25/18/48/watercolor-2681039_1280.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* Glass container */
+    .container {
+      display: flex;
+      height: 100vh;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Left column with buttons */
+    .sidebar {
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Button labels */
+    .sidebar label {
+      padding: 10px 15px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      cursor: pointer;
+      color: #000;
+      text-align: center;
+      transition: background 0.3s, transform 0.2s;
+      font-weight: bold;
+    }
+
+    .sidebar label:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+    }
+
+    /* Hide radio buttons */
+    input[type="radio"] {
+      display: none;
+    }
+
+    /* Right content column */
+    .content {
+      width: 80%;
+      padding: 20px;
+      color: #000;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      backdrop-filter: blur(8px);
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    /* Show only selected section */
+    #btn1:checked ~ .content #content1,
+    #btn2:checked ~ .content #content2,
+    #btn3:checked ~ .content #content3 {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
-    <p>This is my first GitHub Pages site!</p>
+
+  <!-- Hidden radio inputs to switch sections -->
+  <input type="radio" name="switch" id="btn1" checked>
+  <input type="radio" name="switch" id="btn2">
+  <input type="radio" name="switch" id="btn3">
+
+  <div class="container">
+    <div class="sidebar">
+      <label for="btn1">Section 1</label>
+      <label for="btn2">Section 2</label>
+      <label for="btn3">Section 3</label>
+    </div>
+
+    <div class="content">
+      <div class="section" id="content1">
+        <h1>Welcome to Section 1</h1>
+        <p>This is the first section. You can write anything you like here.</p>
+      </div>
+      <div class="section" id="content2">
+        <h1>Explore Section 2</h1>
+        <p>This section contains different information from the first.</p>
+      </div>
+      <div class="section" id="content3">
+        <h1>About Section 3</h1>
+        <p>Finally, here is section three with even more content.</p>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
