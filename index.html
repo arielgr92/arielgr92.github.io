@@ -3,19 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>South America Trip 🌎</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>AG in South America 🌎</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e8eaed;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .hero {
+            background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(57, 73, 171, 0.8));
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 3px solid #5c6bc0;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #c5cae9;
+        }
+
+        .trip-dates {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            padding: 12px 24px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .trip-dates i {
+            margin-right: 10px;
+            color: #7986cb;
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+
+        /* Trip Overview */
+        .trip-overview {
+            margin-bottom: 50px;
+        }
+
+        .destination-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .destination-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .destination-emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .destination-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .destination-card p {
+            color: #c5cae9;
+            font-size: 1.1rem;
+        }
+
+        /* Detail Cards */
+        .detail-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            padding: 25px 30px;
+            background: rgba(255,255,255,0.05);
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .detail-icon {
+            background: linear-gradient(135deg, #5c6bc0, #7986cb);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+
+        .detail-icon i {
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .detail-title {
+            flex: 1;
+        }
+
+        .detail-title h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .detail-title p {
+            color: #c5cae9;
+            font-size: 0.9rem;
+        }
+
+        .detail-toggle {
+            color: #7986cb;
+            font-size: 1.2rem;
+        }
+
+        .detail-content {
+            padding: 30px;
+        }
+
+        /* Flight Styles */
+        .flight-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #7986cb;
+        }
+
+        .flight-route {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .airport {
+            background: linear-gradient(135deg, #5c6bc0, #7986cb);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .flight-route i {
+            margin: 0 15px;
+            color: #7986cb;
+        }
+
+        .flight-info {
+            text-align: right;
+            color: #c5cae9;
+        }
+
+        .flight-info p {
+            margin-bottom: 5px;
+        }
+
+        .flight-info strong {
+            color: #ffffff;
+        }
+
+        /* Hotel Styles */
+        .hotel-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #7986cb;
+        }
+
+        .hotel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .hotel-header h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .hotel-rating {
+            font-size: 1.1rem;
+        }
+
+        .hotel-info p {
+            margin-bottom: 8px;
+            color: #c5cae9;
+        }
+
+        .hotel-info strong {
+            color: #ffffff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .destination-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .flight-item {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .flight-info {
+                text-align: left;
+            }
+            
+            .detail-header {
+                padding: 20px;
+            }
+            
+            .detail-content {
+                padding: 20px;
+            }
+        }
+
+        /* Interactive Elements */
+        .detail-header:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .detail-content {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="hero">
         <div class="container">
-            <h1 class="hero-title">🌎 South America Trip</h1>
+            <h1 class="hero-title">🌎 AG in South America</h1>
             <p class="hero-subtitle">Adventure awaits in beautiful destinations</p>
             <div class="trip-dates">
                 <i class="fas fa-calendar-alt"></i>
-                <span>Sept XX - Sept YY</span>
+                <span>Sept 16 - Sept 30, 2025</span>
             </div>
         </div>
     </header>
@@ -26,19 +311,14 @@
         <section class="trip-overview">
             <div class="destination-cards">
                 <div class="destination-card">
-                    <div class="destination-emoji">🏔️</div>
-                    <h3>Chile</h3>
-                    <p>X days</p>
-                </div>
-                <div class="destination-card">
                     <div class="destination-emoji">🦙</div>
                     <h3>Bolivia</h3>
-                    <p>X days</p>
+                    <p>11 days</p>
                 </div>
                 <div class="destination-card">
-                    <div class="destination-emoji">🌮</div>
-                    <h3>Mexico</h3>
-                    <p>X days</p>
+                    <div class="destination-emoji">🏔️</div>
+                    <h3>Chile</h3>
+                    <p>3 days</p>
                 </div>
             </div>
         </section>
@@ -62,54 +342,66 @@
                 <div class="detail-content">
                     <div class="flight-item">
                         <div class="flight-route">
-                            <span class="airport">USA</span>
-                            <i class="fas fa-arrow-right"></i>
-                            <span class="airport">SCL</span>
-                        </div>
-                        <div class="flight-info">
-                            <p><strong>Sept XX, 2025</strong></p>
-                            <p>LATAM Airlines - LA####</p>
-                            <p>Departure: XX:XX AM | Arrival: XX:XX PM</p>
-                            <p>Seat: TBD</p>
-                        </div>
-                    </div>
-                    <div class="flight-item">
-                        <div class="flight-route">
-                            <span class="airport">SCL</span>
+                            <span class="airport">IAD</span>
                             <i class="fas fa-arrow-right"></i>
                             <span class="airport">LPB</span>
                         </div>
                         <div class="flight-info">
-                            <p><strong>Sept XX, 2025</strong></p>
-                            <p>BOA Airlines - OB####</p>
-                            <p>Departure: XX:XX AM | Arrival: XX:XX PM</p>
-                            <p>Seat: TBD</p>
+                            <p><strong>September 16, 2025</strong></p>
+                            <p>AVIANCA</p>
+                            <p>Departure: 15:20 | Arrival: 2:10+1 (10h 50m)</p>
+                            <p>Stop: Bogotá (1h 40m)</p>
                         </div>
                     </div>
                     <div class="flight-item">
                         <div class="flight-route">
                             <span class="airport">LPB</span>
                             <i class="fas fa-arrow-right"></i>
-                            <span class="airport">MEX</span>
+                            <span class="airport">CBB</span>
                         </div>
                         <div class="flight-info">
-                            <p><strong>Sept XX, 2025</strong></p>
-                            <p>Aeroméxico - AM####</p>
-                            <p>Departure: XX:XX AM | Arrival: XX:XX PM</p>
-                            <p>Seat: TBD</p>
+                            <p><strong>September 18, 2025</strong></p>
+                            <p>BOA - OB 613</p>
+                            <p>Departure: 2:00 PM | Arrival: 2:45 PM (45 min)</p>
+                            <p>Passenger: Ariel Goldberger Rico</p>
                         </div>
                     </div>
                     <div class="flight-item">
                         <div class="flight-route">
-                            <span class="airport">MEX</span>
+                            <span class="airport">CBB</span>
                             <i class="fas fa-arrow-right"></i>
-                            <span class="airport">USA</span>
+                            <span class="airport">VVI</span>
                         </div>
                         <div class="flight-info">
-                            <p><strong>Sept YY, 2025</strong></p>
-                            <p>American Airlines - AA####</p>
-                            <p>Departure: XX:XX AM | Arrival: XX:XX PM</p>
-                            <p>Seat: TBD</p>
+                            <p><strong>September 26, 2025</strong></p>
+                            <p>BOA - OB946</p>
+                            <p>Departure: 3:25 PM | Arrival: 4:15 PM (50 min)</p>
+                            <p>Direct · Economy</p>
+                        </div>
+                    </div>
+                    <div class="flight-item">
+                        <div class="flight-route">
+                            <span class="airport">VVI</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="airport">SCL</span>
+                        </div>
+                        <div class="flight-info">
+                            <p><strong>September 27, 2025</strong></p>
+                            <p>LATAM - Code: NFYEMN</p>
+                            <p>Departure: 10:18 AM | Arrival: 2:27 PM</p>
+                        </div>
+                    </div>
+                    <div class="flight-item">
+                        <div class="flight-route">
+                            <span class="airport">SCL</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="airport">DCA</span>
+                        </div>
+                        <div class="flight-info">
+                            <p><strong>September 30, 2025</strong></p>
+                            <p>DELTA - #GNR6N2</p>
+                            <p>Departure: 9:40 PM | Arrival: 11:29 AM+1</p>
+                            <p>Stop: Atlanta, GA (ATL) - Oct 1, 9:45 AM</p>
                         </div>
                     </div>
                 </div>
@@ -132,153 +424,49 @@
                 <div class="detail-content">
                     <div class="hotel-item">
                         <div class="hotel-header">
-                            <h3>🏔️ Hotel Santiago</h3>
-                            <span class="hotel-rating">⭐⭐⭐⭐</span>
-                        </div>
-                        <div class="hotel-info">
-                            <p><strong>Location:</strong> Santiago, Chile</p>
-                            <p><strong>Dates:</strong> Sept XX - XX, 2025 (X nights)</p>
-                            <p><strong>Address:</strong> TBD</p>
-                            <p><strong>Room:</strong> TBD</p>
-                            <p><strong>Confirmation:</strong> #TBD</p>
-                        </div>
-                    </div>
-                    <div class="hotel-item">
-                        <div class="hotel-header">
-                            <h3>🦙 Hotel Salar</h3>
+                            <h3>🦙 NC Hotel</h3>
                             <span class="hotel-rating">⭐⭐⭐⭐</span>
                         </div>
                         <div class="hotel-info">
                             <p><strong>Location:</strong> La Paz, Bolivia</p>
-                            <p><strong>Dates:</strong> Sept XX - XX, 2025 (X nights)</p>
-                            <p><strong>Address:</strong> TBD</p>
-                            <p><strong>Room:</strong> TBD</p>
-                            <p><strong>Confirmation:</strong> #TBD</p>
+                            <p><strong>Dates:</strong> Sept 16 - 18, 2025 (2 nights)</p>
+                            <p><strong>Address:</strong> Torre Girasoles, Centro de la ciudad Av.6 de Agosto 2628 Edificio, La Paz, Bolivia</p>
+                            <p><strong>Confirmation:</strong> #16122</p>
                         </div>
                     </div>
                     <div class="hotel-item">
                         <div class="hotel-header">
-                            <h3>🌮 Hotel Zócalo</h3>
+                            <h3>🏔️ Cochabamba Hotel</h3>
+                            <span class="hotel-rating">⭐⭐⭐</span>
+                        </div>
+                        <div class="hotel-info">
+                            <p><strong>Location:</strong> Cochabamba, Bolivia</p>
+                            <p><strong>Dates:</strong> Sept 18 - 26, 2025 (8 nights)</p>
+                            <p><strong>Status:</strong> Pending Confirmation</p>
+                        </div>
+                    </div>
+                    <div class="hotel-item">
+                        <div class="hotel-header">
+                            <h3>🌴 Santa Cruz Hotel</h3>
+                            <span class="hotel-rating">⭐⭐⭐</span>
+                        </div>
+                        <div class="hotel-info">
+                            <p><strong>Location:</strong> Santa Cruz de la Sierra, Bolivia</p>
+                            <p><strong>Dates:</strong> Sept 26 - 27, 2025 (1 night)</p>
+                            <p><strong>Status:</strong> Pending Confirmation</p>
+                        </div>
+                    </div>
+                    <div class="hotel-item">
+                        <div class="hotel-header">
+                            <h3>🏔️ Hyatt Place Santiago</h3>
                             <span class="hotel-rating">⭐⭐⭐⭐⭐</span>
                         </div>
                         <div class="hotel-info">
-                            <p><strong>Location:</strong> Mexico City, Mexico</p>
-                            <p><strong>Dates:</strong> Sept XX - YY, 2025 (X nights)</p>
-                            <p><strong>Address:</strong> TBD</p>
-                            <p><strong>Room:</strong> TBD</p>
-                            <p><strong>Confirmation:</strong> #TBD</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Itinerary Section -->
-            <div class="detail-card" data-section="itinerary">
-                <div class="detail-header">
-                    <div class="detail-icon">
-                        <i class="fas fa-route"></i>
-                    </div>
-                    <div class="detail-title">
-                        <h2>Itinerary</h2>
-                        <p>Daily plans and must-see attractions</p>
-                    </div>
-                    <div class="detail-toggle">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                <div class="detail-content">
-                    <div class="itinerary-day">
-                        <h3>📅 Day 1 - Sept XX</h3>
-                        <div class="day-activities">
-                            <div class="activity">
-                                <span class="time">XX:XX AM</span>
-                                <span class="activity-desc">✈️ Departure to Chile</span>
-                            </div>
-                            <div class="activity">
-                                <span class="time">XX:XX PM</span>
-                                <span class="activity-desc">🛬 Arrival in Santiago</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <h3>📅 Day 2 - Sept XX</h3>
-                        <div class="day-activities">
-                            <div class="activity">
-                                <span class="time">9:00 AM</span>
-                                <span class="activity-desc">🏔️ Andes Mountains Tour</span>
-                            </div>
-                            <div class="activity">
-                                <span class="time">2:00 PM</span>
-                                <span class="activity-desc">🍷 Wine Tasting in Maipo Valley</span>
-                            </div>
-                            <div class="activity">
-                                <span class="time">6:00 PM</span>
-                                <span class="activity-desc">🌆 Santiago City Center</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <h3>📅 Day 3 - Sept XX</h3>
-                        <div class="day-activities">
-                            <div class="activity">
-                                <span class="time">10:00 AM</span>
-                                <span class="activity-desc">🦙 Flight to Bolivia</span>
-                            </div>
-                            <div class="activity">
-                                <span class="time">3:00 PM</span>
-                                <span class="activity-desc">🏛️ La Paz Historic Center</span>
-                            </div>
-                            <div class="activity">
-                                <span class="time">6:00 PM</span>
-                                <span class="activity-desc">🌄 Sunset at Mirador Killi Killi</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Documents Section -->
-            <div class="detail-card" data-section="documents">
-                <div class="detail-header">
-                    <div class="detail-icon">
-                        <i class="fas fa-passport"></i>
-                    </div>
-                    <div class="detail-title">
-                        <h2>Documents</h2>
-                        <p>Important travel documents and requirements</p>
-                    </div>
-                    <div class="detail-toggle">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                <div class="detail-content">
-                    <div class="document-grid">
-                        <div class="document-item">
-                            <i class="fas fa-passport"></i>
-                            <h4>Passport</h4>
-                            <p>Valid until: TBD</p>
-                            <p>Number: TBD</p>
-                        </div>
-                        <div class="document-item">
-                            <i class="fas fa-credit-card"></i>
-                            <h4>Travel Insurance</h4>
-                            <p>Provider: TBD</p>
-                            <p>Policy: TBD</p>
-                        </div>
-                        <div class="document-item">
-                            <i class="fas fa-mobile-alt"></i>
-                            <h4>Emergency Contacts</h4>
-                            <p>US Embassy Chile: +56 2 2330 3000</p>
-                            <p>US Embassy Bolivia: +591 2 216 8000</p>
-                            <p>US Embassy Mexico: +52 55 5080 2000</p>
-                        </div>
-                        <div class="document-item">
-                            <i class="fas fa-suitcase"></i>
-                            <h4>Packing List</h4>
-                            <p>✅ Altitude sickness medication</p>
-                            <p>✅ Warm clothes for Bolivia</p>
-                            <p>✅ Camera & chargers</p>
-                            <p>✅ Sunscreen & sunglasses</p>
+                            <p><strong>Location:</strong> Santiago, Chile</p>
+                            <p><strong>Dates:</strong> Sept 27 - 29, 2025 (2 nights)</p>
+                            <p><strong>Address:</strong> Americo Vespucio Norte 1597 - Vitacura, Santiago, CL, 7630293</p>
+                            <p><strong>Check-in:</strong> Saturday, 27-Sep-2025, 03:00 PM</p>
+                            <p><strong>Checkout:</strong> Monday, 29-Sep-2025, 12:00 PM</p>
                         </div>
                     </div>
                 </div>
@@ -286,13 +474,44 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>🌎 Safe travels and amazing adventures await in South America! 🦙</p>
-        </div>
-    </footer>
+    <script>
+        // Simple toggle functionality for detail cards
+        document.querySelectorAll('.detail-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const toggle = header.querySelector('.detail-toggle i');
+                
+                if (content.style.display === 'none') {
+                    content.style.display = 'block';
+                    toggle.style.transform = 'rotate(180deg)';
+                } else {
+                    content.style.display = 'none';
+                    toggle.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
 
-    <script src="js/script.js"></script>
+        // Add smooth animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.destination-card, .detail-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `fadeInUp 0.6s ease forwards ${index * 0.1}s`;
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+            });
+        });
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
