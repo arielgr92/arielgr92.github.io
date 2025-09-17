@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FX Converter | AG in South America</title>
+    <title>AG in South America 🌎</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -19,13 +19,11 @@
             background: 
                 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
                 linear-gradient(135deg, #0a0f1c 0%, #1a1f3a 25%, #2d1b69 50%, #1a1f3a 75%, #0a0f1c 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         /* Animated background particles */
@@ -38,8 +36,9 @@
             height: 100%;
             background-image: 
                 radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.1), transparent),
-                radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.05), transparent),
-                radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.08), transparent);
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.05), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.08), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.03), transparent);
             background-repeat: repeat;
             background-size: 200px 100px;
             animation: sparkle 20s linear infinite;
@@ -57,292 +56,470 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(1px);
-            animation: float 8s ease-in-out infinite;
+            animation: float 6s ease-in-out infinite;
             pointer-events: none;
             z-index: -1;
         }
 
         .orb-1 {
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(120, 119, 198, 0.2) 0%, transparent 70%);
-            top: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(120, 119, 198, 0.4) 0%, transparent 70%);
+            top: 20%;
             left: 10%;
             animation-delay: 0s;
         }
 
         .orb-2 {
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(255, 119, 198, 0.2) 0%, transparent 70%);
-            top: 70%;
-            right: 20%;
-            animation-delay: 3s;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 119, 198, 0.3) 0%, transparent 70%);
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .orb-3 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(120, 219, 255, 0.4) 0%, transparent 70%);
+            top: 40%;
+            left: 70%;
+            animation-delay: 4s;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.4; }
-            50% { transform: translateY(-30px) scale(1.1); opacity: 0.7; }
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-20px) scale(1.1); opacity: 1; }
         }
 
-        /* Back button */
-        .back-btn {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50px;
-            padding: 15px 25px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Styles */
+        .hero {
+            background: 
+                linear-gradient(135deg, rgba(26, 35, 126, 0.9) 0%, rgba(57, 73, 171, 0.8) 50%, rgba(120, 119, 198, 0.7) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 3px solid #5c6bc0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.02) 50%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
             color: #ffffff;
-            text-decoration: none;
+            text-shadow: 
+                2px 2px 4px rgba(0,0,0,0.3),
+                0 0 20px rgba(255,255,255,0.2);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.2); }
+            to { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 30px rgba(255,255,255,0.4); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: #c5cae9;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .trip-dates {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255,255,255,0.15);
+            padding: 15px 30px;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 1s;
             transition: all 0.3s ease;
-            z-index: 100;
-            font-size: 0.9rem;
-            font-weight: 500;
         }
 
-        .back-btn:hover {
-            background: rgba(255,255,255,0.2);
+        .trip-dates:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
         }
 
-        .back-btn i {
-            margin-right: 8px;
-            transition: transform 0.3s ease;
+        .trip-dates i {
+            margin-right: 12px;
+            color: #7986cb;
         }
 
-        .back-btn:hover i {
-            transform: translateX(-3px);
+        /* Main Content */
+        main {
+            padding: 60px 0;
         }
 
-        /* Main converter container */
-        .converter-container {
+        /* Trip Overview */
+        .trip-overview {
+            margin-bottom: 60px;
+        }
+
+        .destination-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .destination-card {
             background: 
                 linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 30px;
-            padding: 60px 50px;
+            border-radius: 25px;
+            padding: 40px;
             text-align: center;
-            box-shadow: 
-                0 25px 50px rgba(0,0,0,0.2),
-                inset 0 1px 0 rgba(255,255,255,0.1);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            max-width: 480px;
-            width: 90%;
-            animation: fadeInUp 1s ease forwards;
         }
 
-        .converter-container::before {
+        .destination-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: left 0.8s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
         }
 
-        .converter-container:hover::before {
+        .destination-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .destination-card:hover::before {
             left: 100%;
         }
 
-        .converter-title {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        /* Input section */
-        .input-section {
-            margin-bottom: 50px;
-        }
-
-        .input-label {
-            font-size: 1.1rem;
-            color: #c5cae9;
-            margin-bottom: 15px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .input-container {
-            position: relative;
+        .destination-emoji {
+            font-size: 4rem;
             margin-bottom: 20px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            animation: bounce 2s ease-in-out infinite;
         }
 
-        .currency-input {
-            width: 100%;
-            padding: 20px 25px;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .destination-card h3 {
             font-size: 2rem;
-            text-align: center;
-            background: rgba(255,255,255,0.08);
-            border: 2px solid rgba(255,255,255,0.15);
-            border-radius: 20px;
+            margin-bottom: 15px;
             color: #ffffff;
-            outline: none;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .destination-card p {
+            color: #c5cae9;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Detail Cards */
+        .detail-card {
+            background: 
+                linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            margin-bottom: 40px;
+            overflow: hidden;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-weight: 300;
-            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .currency-input:focus {
-            border-color: #7986cb;
-            box-shadow: 
-                0 0 30px rgba(121, 134, 203, 0.3),
-                inset 0 2px 10px rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.12);
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
-        .currency-input::placeholder {
-            color: rgba(255,255,255,0.4);
-            font-weight: 300;
+        .detail-header {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            background: 
+                linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s ease;
         }
 
-        /* Results section */
-        .results-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        .detail-header:hover {
+            background: 
+                linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
         }
 
-        .results-section.show {
-            opacity: 1;
+        /* Special styling for FX Converter header */
+        .detail-header.converter-header {
+            background: 
+                linear-gradient(135deg, rgba(121, 134, 203, 0.1) 0%, rgba(121, 134, 203, 0.05) 100%);
+            border-bottom: 1px solid rgba(121, 134, 203, 0.2);
         }
 
-        .result-card {
+        .detail-header.converter-header:hover {
+            background: 
+                linear-gradient(135deg, rgba(121, 134, 203, 0.15) 0%, rgba(121, 134, 203, 0.08) 100%);
+            transform: translateY(-2px);
+        }
+
+        .detail-icon {
+            background: linear-gradient(135deg, #5c6bc0, #7986cb);
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+            box-shadow: 0 8px 20px rgba(92, 107, 192, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .detail-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(92, 107, 192, 0.5);
+        }
+
+        .detail-icon i {
+            font-size: 1.4rem;
+            color: white;
+        }
+
+        .detail-title {
+            flex: 1;
+        }
+
+        .detail-title h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .detail-title p {
+            color: #c5cae9;
+            font-size: 1rem;
+        }
+
+        .detail-toggle {
+            color: #7986cb;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+        }
+
+        .detail-content {
+            padding: 40px;
+        }
+
+        /* Flight Styles */
+        .flight-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 25px;
             background: 
                 linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
-            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 20px;
-            padding: 30px 20px;
-            position: relative;
+            margin-bottom: 25px;
+            border-left: 5px solid #7986cb;
             transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
         }
 
-        .result-card::before {
+        .flight-item::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(121, 134, 203, 0.1), transparent);
+            transition: width 0.3s ease;
+        }
+
+        .flight-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .flight-item:hover::before {
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #5c6bc0, #7986cb);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-            transform-origin: left;
         }
 
-        .result-card:hover {
-            transform: translateY(-5px);
-            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .result-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .result-label {
-            font-size: 0.9rem;
-            color: #c5cae9;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-
-        .result-value {
-            font-size: 1.8rem;
+        .flight-route {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
             color: #ffffff;
-            font-weight: 300;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            word-break: break-all;
-            line-height: 1.2;
+            margin-bottom: 15px;
         }
 
-        .result-currency {
-            font-size: 0.8rem;
+        .airport {
+            background: linear-gradient(135deg, #5c6bc0, #7986cb);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(92, 107, 192, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .airport:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(92, 107, 192, 0.5);
+        }
+
+        .flight-route i {
+            margin: 0 20px;
             color: #7986cb;
-            margin-left: 5px;
-            font-weight: 500;
-        }
-
-        /* Exchange rate indicators */
-        .rate-indicator {
-            position: absolute;
-            top: 10px;
-            right: 15px;
             font-size: 1.2rem;
-            opacity: 0.7;
         }
 
-        .official-rate {
-            color: #4caf50;
+        .flight-info {
+            text-align: right;
+            color: #c5cae9;
         }
 
-        .blue-rate {
-            color: #2196f3;
+        .flight-info p {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
         }
 
-        /* Responsive design */
+        .flight-info strong {
+            color: #ffffff;
+        }
+
+        /* Hotel Styles */
+        .hotel-item {
+            background: 
+                linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid #7986cb;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hotel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(121, 134, 203, 0.1), transparent);
+            transition: width 0.3s ease;
+        }
+
+        .hotel-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .hotel-item:hover::before {
+            width: 100%;
+        }
+
+        .hotel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .hotel-header h3 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hotel-rating {
+            font-size: 1.3rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .hotel-info p {
+            margin-bottom: 10px;
+            color: #c5cae9;
+            font-size: 1.05rem;
+        }
+
+        .hotel-info strong {
+            color: #ffffff;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .converter-container {
-                padding: 40px 30px;
-                margin: 20px;
+            .hero-title {
+                font-size: 3rem;
             }
-
-            .converter-title {
-                font-size: 1.6rem;
-                margin-bottom: 30px;
-            }
-
-            .currency-input {
-                font-size: 1.8rem;
-                padding: 18px 20px;
-            }
-
-            .results-section {
+            
+            .destination-cards {
                 grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .flight-item {
+                flex-direction: column;
                 gap: 20px;
             }
-
-            .result-value {
-                font-size: 1.5rem;
+            
+            .flight-info {
+                text-align: left;
+            }
+            
+            .detail-header {
+                padding: 25px;
+            }
+            
+            .detail-content {
+                padding: 25px;
             }
 
-            .back-btn {
-                top: 20px;
-                left: 20px;
-                padding: 12px 20px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .converter-container {
-                padding: 30px 20px;
-            }
-
-            .currency-input {
-                font-size: 1.5rem;
-            }
-
-            .result-card {
-                padding: 25px 15px;
+            .destination-cards {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -350,157 +527,293 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px) scale(0.9);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
             }
         }
 
-        /* Number animation */
-        .result-value {
-            transition: all 0.3s ease;
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
         }
 
-        .result-value.updating {
-            transform: scale(1.05);
-            color: #7986cb;
-        }
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
     </style>
 </head>
 <body>
     <!-- Floating orbs -->
     <div class="floating-orb orb-1"></div>
     <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
 
-    <!-- Back button -->
-    <a href="#" class="back-btn" onclick="window.history.back()">
-        <i class="fas fa-arrow-left"></i>
-        Back to Trip
-    </a>
-
-    <!-- Main converter -->
-    <div class="converter-container">
-        <h1 class="converter-title">FX Converter</h1>
-        
-        <div class="input-section">
-            <div class="input-label">Amount in Bolivianos</div>
-            <div class="input-container">
-                <input 
-                    type="number" 
-                    class="currency-input" 
-                    id="bsInput" 
-                    placeholder="0.00"
-                    min="0"
-                    step="0.01"
-                >
+    <!-- Header -->
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">🌎 AG in South America</h1>
+            <p class="hero-subtitle">Adventure awaits in beautiful destinations</p>
+            <div class="trip-dates">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Sept 16 - Sept 30, 2025</span>
             </div>
         </div>
+    </header>
 
-        <div class="results-section" id="resultsSection">
-            <div class="result-card">
-                <div class="rate-indicator official-rate">
-                    <i class="fas fa-university"></i>
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Trip Overview -->
+        <section class="trip-overview">
+            <div class="destination-cards">
+                <div class="destination-card fade-in">
+                    <div class="destination-emoji">🦙</div>
+                    <h3>Bolivia</h3>
+                    <p>11 days</p>
                 </div>
-                <div class="result-label">Official FX</div>
-                <div class="result-value" id="officialResult">
-                    0.00<span class="result-currency">USD</span>
-                </div>
-            </div>
-            
-            <div class="result-card">
-                <div class="rate-indicator blue-rate">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="result-label">Blue FX</div>
-                <div class="result-value" id="blueResult">
-                    0.00<span class="result-currency">USD</span>
+                <div class="destination-card fade-in">
+                    <div class="destination-emoji">🏔️</div>
+                    <h3>Chile</h3>
+                    <p>3 days</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <!-- Trip Details -->
+        <section class="trip-details">
+            <!-- Flights Section -->
+            <div class="detail-card fade-in" data-section="flights">
+                <div class="detail-header">
+                    <div class="detail-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="detail-title">
+                        <h2>Flights</h2>
+                        <p>All flight information and boarding passes</p>
+                    </div>
+                    <div class="detail-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="detail-content">
+                    <div class="flight-item">
+                        <div class="flight-route">
+                            <span class="airport">IAD</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="airport">LPB</span>
+                        </div>
+                        <div class="flight-info">
+                            <p><strong>September 16, 2025</strong></p>
+                            <p>AVIANCA</p>
+                            <p>Departure: 15:20 | Arrival: 2:10+1 (10h 50m)</p>
+                            <p>Stop: Bogotá (1h 40m)</p>
+                        </div>
+                    </div>
+                    <div class="flight-item">
+                        <div class="flight-route">
+                            <span class="airport">LPB</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="airport">CBB</span>
+                        </div>
+                        <div class="flight-info">
+                            <p><strong>September 18, 2025</strong></p>
+                            <p>BOA - OB 613</p>
+                            <p>Departure: 2:00 PM | Arrival: 2:45 PM (45 min)</p>
+                        </div>
+                    </div>
+                    <div class="flight-item">
+                        <div class="flight-route">
+                            <span class="airport">CBB</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="airport">VVI</span>
+                        </div>
+                        <div class="flight-info">
+                            <p><strong>September 26, 2025</strong></p>
+                            <p>BOA - OB946</p>
+                            <p>Departure: 3:25 PM | Arrival: 4:15 PM (50 min)</p>
+                            <p>Direct · Economy</p>
+                        </div>
+                    </div>
+                    <div class="flight-item">
+                        <div class="flight-route">
+                            <span class="airport">VVI</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="airport">SCL</span>
+                        </div>
+                        <div class="flight-info">
+                            <p><strong>September 27, 2025</strong></p>
+                            <p>LATAM - Code: NFYEMN</p>
+                            <p>Departure: 10:18 AM | Arrival: 2:27 PM</p>
+                        </div>
+                    </div>
+                    <div class="flight-item">
+                        <div class="flight-route">
+                            <span class="airport">SCL</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="airport">DCA</span>
+                        </div>
+                        <div class="flight-info">
+                            <p><strong>September 30, 2025</strong></p>
+                            <p>DELTA - #GNR6N2</p>
+                            <p>Departure: 9:40 PM | Arrival: 11:29 AM+1</p>
+                            <p>Stop: Atlanta, GA (ATL) - Oct 1, 9:45 AM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotels Section -->
+            <div class="detail-card fade-in" data-section="hotels">
+                <div class="detail-header">
+                    <div class="detail-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="detail-title">
+                        <h2>Hotels</h2>
+                        <p>Accommodation details and confirmations</p>
+                    </div>
+                    <div class="detail-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="detail-content">
+                    <div class="hotel-item">
+                        <div class="hotel-header">
+                            <h3>🦙 NC Hotel</h3>
+                            <span class="hotel-rating">⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="hotel-info">
+                            <p><strong>Location:</strong> La Paz, Bolivia</p>
+                            <p><strong>Dates:</strong> Sept 16 - 18, 2025 (2 nights)</p>
+                            <p><strong>Address:</strong> Torre Girasoles, Centro de la ciudad Av.6 de Agosto 2628 Edificio, La Paz, Bolivia</p>
+                            <p><strong>Confirmation:</strong> #16122</p>
+                        </div>
+                    </div>
+                    <div class="hotel-item">
+                        <div class="hotel-header">
+                            <h3>🏔️ Catena / Airbnb</h3>
+                            <span class="hotel-rating">⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="hotel-info">
+                            <p><strong>Location:</strong> Cochabamba, Bolivia</p>
+                            <p><strong>Dates:</strong> Sept 18 - 26, 2025 (8 nights)</p>
+                            <p><strong>Type:</strong> Boutique Hotel / Airbnb</p>
+                        </div>
+                    </div>
+                    <div class="hotel-item">
+                        <div class="hotel-header">
+                            <h3>🌴 Hampton by Hilton Santa Cruz/Equipetrol</h3>
+                            <span class="hotel-rating">⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="hotel-info">
+                            <p><strong>Location:</strong> Santa Cruz de la Sierra, Bolivia</p>
+                            <p><strong>Dates:</strong> Sept 26 - 27, 2025 (1 night)</p>
+                            <p><strong>Address:</strong> San Martin Avenue Esq., Street E-Equipetrol</p>
+                        </div>
+                    </div>
+                    <div class="hotel-item">
+                        <div class="hotel-header">
+                            <h3>🏔️ Hyatt Place Santiago</h3>
+                            <span class="hotel-rating">⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="hotel-info">
+                            <p><strong>Location:</strong> Santiago, Chile</p>
+                            <p><strong>Dates:</strong> Sept 27 - 29, 2025 (2 nights)</p>
+                            <p><strong>Address:</strong> Americo Vespucio Norte 1597 - Vitacura, Santiago, CL, 7630293</p>
+                            <p><strong>Check-in:</strong> Saturday, 27-Sep-2025, 03:00 PM</p>
+                            <p><strong>Checkout:</strong> Monday, 29-Sep-2025, 12:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FX Converter Section -->
+            <div class="detail-card fade-in" data-section="converter">
+                <div class="detail-header converter-header" onclick="window.open('fx-converter.html', '_blank')">
+                    <div class="detail-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="detail-title">
+                        <h2>FX Converter</h2>
+                        <p>Convert Bolivianos to USD (Official & Blue rates)</p>
+                    </div>
+                    <div class="detail-toggle">
+                        <i class="fas fa-external-link-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script>
-        const bsInput = document.getElementById('bsInput');
-        const officialResult = document.getElementById('officialResult');
-        const blueResult = document.getElementById('blueResult');
-        const resultsSection = document.getElementById('resultsSection');
-
-        // Exchange rates
-        const OFFICIAL_RATE = 7;
-        const BLUE_RATE = 12.75;
-
-        function formatNumber(num) {
-            if (num === 0) return '0.00';
-            if (num < 0.01) return '< 0.01';
-            return num.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-        }
-
-        function updateResults() {
-            const bsAmount = parseFloat(bsInput.value) || 0;
-            
-            if (bsAmount > 0) {
-                resultsSection.classList.add('show');
-                
-                // Add updating animation
-                officialResult.classList.add('updating');
-                blueResult.classList.add('updating');
-                
-                setTimeout(() => {
-                    const officialValue = bsAmount / OFFICIAL_RATE;
-                    const blueValue = bsAmount / BLUE_RATE;
-                    
-                    officialResult.innerHTML = `${formatNumber(officialValue)}<span class="result-currency">USD</span>`;
-                    blueResult.innerHTML = `${formatNumber(blueValue)}<span class="result-currency">USD</span>`;
-                    
-                    // Remove updating animation
-                    officialResult.classList.remove('updating');
-                    blueResult.classList.remove('updating');
-                }, 150);
-            } else {
-                resultsSection.classList.remove('show');
-            }
-        }
-
-        // Real-time updates
-        bsInput.addEventListener('input', updateResults);
-        bsInput.addEventListener('keyup', updateResults);
-
-        // Focus on input when page loads
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                bsInput.focus();
-            }, 500);
-        });
-
-        // Enhanced number input handling
-        bsInput.addEventListener('keydown', (e) => {
-            // Allow: backspace, delete, tab, escape, enter, and .
-            if ([46, 8, 9, 27, 13, 110, 190].indexOf(e.keyCode) !== -1 ||
-                // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
-                (e.keyCode === 65 && e.ctrlKey === true) ||
-                (e.keyCode === 67 && e.ctrlKey === true) ||
-                (e.keyCode === 86 && e.ctrlKey === true) ||
-                (e.keyCode === 88 && e.ctrlKey === true) ||
-                // Allow: home, end, left, right
-                (e.keyCode >= 35 && e.keyCode <= 39)) {
+        // Enhanced toggle functionality with smooth animations
+        document.querySelectorAll('.detail-header').forEach(header => {
+            // Skip the FX converter header as it has its own click handler
+            if (header.classList.contains('converter-header')) {
                 return;
             }
-            // Ensure that it is a number and stop the keypress
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                e.preventDefault();
-            }
+            
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const toggle = header.querySelector('.detail-toggle i');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    toggle.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    toggle.style.transform = 'rotate(180deg)';
+                }
+            });
         });
 
-        // Prevent negative values
-        bsInput.addEventListener('input', (e) => {
-            if (e.target.value < 0) {
-                e.target.value = 0;
-            }
+        // Initialize all sections as open (except converter)
+        document.addEventListener('DOMContentLoaded', () => {
+            const contents = document.querySelectorAll('.detail-content');
+            const toggles = document.querySelectorAll('.detail-toggle i');
+            
+            contents.forEach(content => {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.transition = 'max-height 0.3s ease';
+            });
+            
+            // Only rotate chevron icons, not external link icons
+            toggles.forEach(toggle => {
+                if (toggle.classList.contains('fa-chevron-down')) {
+                    toggle.style.transform = 'rotate(180deg)';
+                }
+                toggle.style.transition = 'transform 0.3s ease';
+            });
+
+            // Staggered fade-in animation for cards
+            const cards = document.querySelectorAll('.fade-in');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Parallax effect for floating orbs
+        document.addEventListener('mousemove', (e) => {
+            const orbs = document.querySelectorAll('.floating-orb');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 0.02;
+                const xPos = (x - 0.5) * speed * 100;
+                const yPos = (y - 0.5) * speed * 100;
+                
+                orb.style.transform = `translate(${xPos}px, ${yPos}px)`;
+            });
         });
     </script>
 </body>
