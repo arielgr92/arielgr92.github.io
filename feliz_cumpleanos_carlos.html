@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Carlos! 🎂</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #D4AF37; --gold-light: #F4E4BA; --burgundy: #722F37;
+            --cream: #FDF8F0; --envelope-tan: #D2B48C; --paper: #FFFEF7;
+        }
+        body {
+            font-family: 'Crimson Pro', Georgia, serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh; overflow-x: hidden; color: var(--burgundy);
+        }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; width: 3px; height: 3px; background: white; border-radius: 50%; animation: twinkle 2s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        .confetti-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000; overflow: hidden; }
+        .confetti { position: absolute; width: 12px; height: 12px; opacity: 0; }
+        .container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; position: relative; z-index: 1; }
+        .envelope-wrapper { perspective: 1000px; cursor: pointer; position: relative; }
+        .envelope { width: 500px; height: 350px; position: relative; transform-style: preserve-3d; }
+        .envelope-body { width: 100%; height: 100%; background: linear-gradient(145deg, var(--envelope-tan) 0%, #C4A574 100%); border-radius: 8px; position: absolute; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+        .envelope-body::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 2px dashed var(--burgundy); border-radius: 4px; opacity: 0.3; }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(180deg, #E8D5B7 0%, var(--envelope-tan) 100%); clip-path: polygon(0 0, 50% 70%, 100% 0); transform-origin: top center; transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 10; }
+        .envelope-flap.open { transform: rotateX(-180deg); }
+        .wax-seal { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: radial-gradient(circle at 30% 30%, #9B2335 0%, var(--burgundy) 50%, #4A1A1F 100%); border-radius: 50%; z-index: 20; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2); }
+        .wax-seal span { font-family: 'Dancing Script', cursive; color: var(--gold-light); font-size: 32px; font-weight: 700; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+        .envelope-hint { position: absolute; bottom: -70px; left: 50%; transform: translateX(-50%); color: #1a1a2e; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%); padding: 15px 40px; border-radius: 50px; animation: pulse-glow 1.5s infinite; box-shadow: 0 5px 30px rgba(212, 175, 55, 0.5); cursor: pointer; letter-spacing: 1px; }
+        .envelope-hint::before { content: '👆'; margin-right: 10px; font-size: 24px; }
+        .envelope-hint::after { content: '👆'; margin-left: 10px; font-size: 24px; }
+        @keyframes pulse-glow { 0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 5px 30px rgba(212, 175, 55, 0.5); } 50% { transform: translateX(-50%) scale(1.08); box-shadow: 0 8px 50px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.4); } }
+        .letter-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; z-index: 100; opacity: 0; pointer-events: none; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); }
+        .letter-container.visible { opacity: 1; pointer-events: all; }
+        .letter { width: 800px; max-height: 90vh; overflow-y: auto; background: var(--paper); padding: 60px 80px; border-radius: 4px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5); position: relative; transform: translateY(100px) scale(0.8); opacity: 0; }
+        .letter::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(transparent 0px, transparent 28px, rgba(114, 47, 55, 0.05) 28px, rgba(114, 47, 55, 0.05) 29px); pointer-events: none; }
+        .letter-header { text-align: center; margin-bottom: 40px; position: relative; }
+        .age-badge { display: inline-block; font-family: 'Playfair Display', serif; font-size: 120px; font-weight: 700; color: var(--gold); text-shadow: 3px 3px 0 var(--burgundy), 6px 6px 0 rgba(114, 47, 55, 0.2); line-height: 1; position: relative; }
+        .age-badge::after { content: 'años'; position: absolute; bottom: 10px; right: -60px; font-size: 24px; color: var(--burgundy); font-style: italic; }
+        .letter-title { font-family: 'Dancing Script', cursive; font-size: 48px; color: var(--burgundy); margin-top: 20px; }
+        .letter-subtitle { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); font-weight: 400; margin-top: 10px; }
+        .decorative-line { width: 200px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 30px auto; }
+        .letter-content { font-size: 20px; line-height: 1.8; color: #333; text-align: justify; }
+        .letter-content p { margin-bottom: 24px; text-indent: 40px; }
+        .letter-content p:first-child::first-letter { font-family: 'Playfair Display', serif; font-size: 72px; float: left; line-height: 0.8; padding-right: 12px; color: var(--burgundy); }
+        .highlight { color: var(--burgundy); font-weight: 700; }
+        .funny-note { background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%); padding: 20px 30px; border-left: 4px solid var(--gold); margin: 30px 0; font-style: italic; border-radius: 0 8px 8px 0; }
+        .photo-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
+        .photo-frame { aspect-ratio: 4/3; background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%); border: 8px solid white; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transform: rotate(var(--rotation, 0deg)); }
+        .photo-frame:nth-child(1) { --rotation: -3deg; }
+        .photo-frame:nth-child(2) { --rotation: 2deg; }
+        .photo-frame:nth-child(3) { --rotation: -2deg; }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-placeholder { text-align: center; color: #999; font-size: 14px; }
+        .photo-placeholder span { display: block; font-size: 40px; margin-bottom: 10px; }
+        .signatures { margin-top: 50px; text-align: right; }
+        .with-love { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 22px; color: #666; margin-bottom: 20px; }
+        .signature { font-family: 'Dancing Script', cursive; font-size: 36px; color: var(--burgundy); display: inline-block; margin-left: 30px; }
+        .signature:first-of-type { margin-left: 0; }
+        .gift-section { margin-top: 60px; text-align: center; padding-top: 40px; border-top: 2px dashed var(--gold); }
+        .gift-teaser { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--burgundy); margin-bottom: 30px; }
+        .gift-button { display: inline-block; padding: 20px 50px; background: linear-gradient(135deg, var(--gold) 0%, #B8960C 100%); color: white; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4); transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .gift-button::before { content: '🎁'; margin-right: 15px; }
+        .gift-button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5); }
+        .gift-button:active { transform: translateY(0) scale(0.98); }
+        .gift-section-end { margin-top: 40px; border-top: 2px dashed var(--gold); padding-top: 20px; text-align: center; }
+        .end-flourish { font-family: 'Dancing Script', cursive; font-size: 28px; color: var(--gold); }
+        .scroll-indicator { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; pointer-events: none; z-index: 150; transition: opacity 0.3s ease; }
+        .scroll-indicator.visible { opacity: 1; }
+        .scroll-mouse { width: 30px; height: 50px; border: 3px solid var(--gold); border-radius: 20px; position: relative; background: rgba(0, 0, 0, 0.3); }
+        .scroll-wheel { width: 6px; height: 12px; background: var(--gold); border-radius: 3px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll-wheel-animation 1.5s infinite; }
+        @keyframes scroll-wheel-animation { 0% { opacity: 1; transform: translateX(-50%) translateY(0); } 100% { opacity: 0; transform: translateX(-50%) translateY(18px); } }
+        .scroll-text { font-family: 'Crimson Pro', serif; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; writing-mode: vertical-rl; text-orientation: mixed; }
+        .scroll-arrows { display: flex; flex-direction: column; gap: 2px; }
+        .scroll-arrow { width: 12px; height: 12px; border-right: 3px solid var(--gold); border-bottom: 3px solid var(--gold); transform: rotate(45deg); animation: arrow-bounce 1.5s infinite; }
+        .scroll-arrow:nth-child(2) { animation-delay: 0.2s; }
+        .scroll-arrow:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes arrow-bounce { 0%, 100% { opacity: 0.3; transform: rotate(45deg) translateY(0); } 50% { opacity: 1; transform: rotate(45deg) translateY(5px); } }
+        .coupon-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); display: flex; align-items: center; justify-content: center; z-index: 200; opacity: 0; pointer-events: none; backdrop-filter: blur(20px); }
+        .coupon-overlay.visible { opacity: 1; pointer-events: all; }
+        .boarding-pass { width: 850px; display: flex; position: relative; transform: scale(0.5) rotateY(90deg); opacity: 0; }
+        .boarding-main { flex: 2.5; background: linear-gradient(180deg, #FAFAFA 0%, #F0F0F0 100%); padding: 0; border-radius: 15px 0 0 15px; position: relative; overflow: hidden; }
+        .boarding-stub { flex: 1; background: linear-gradient(180deg, #FAFAFA 0%, #F0F0F0 100%); padding: 25px; border-radius: 0 15px 15px 0; position: relative; border-left: 3px dashed #ccc; }
+        .boarding-stub::before { content: ''; position: absolute; left: -22px; top: -20px; width: 40px; height: 40px; background: rgba(0, 0, 0, 0.9); border-radius: 50%; }
+        .boarding-stub::after { content: ''; position: absolute; left: -22px; bottom: -20px; width: 40px; height: 40px; background: rgba(0, 0, 0, 0.9); border-radius: 50%; }
+        .airline-header { background: linear-gradient(135deg, var(--burgundy) 0%, #4A1A1F 100%); padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .airline-logo { display: flex; align-items: center; gap: 15px; }
+        .airline-icon { font-size: 32px; }
+        .airline-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: white; letter-spacing: 3px; }
+        .boarding-label { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--gold-light); letter-spacing: 4px; }
+        .passenger-tribute { background: linear-gradient(135deg, var(--gold) 0%, #B8960C 100%); padding: 15px 30px; text-align: center; }
+        .tribute-text { font-family: 'Dancing Script', cursive; font-size: 26px; color: #1a1a2e; }
+        .boarding-content { padding: 25px 30px; }
+        .boarding-row { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .boarding-field { flex: 1; }
+        .field-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+        .field-value { font-family: 'Playfair Display', serif; font-size: 20px; color: #1a1a2e; font-weight: 700; }
+        .field-value.large { font-size: 32px; }
+        .field-value.destination { font-size: 28px; color: var(--burgundy); }
+        .boarding-divider { border: none; border-top: 1px dashed #ccc; margin: 20px 0; }
+        .barcode { display: flex; justify-content: center; gap: 2px; padding: 15px 0; }
+        .barcode-line { width: 3px; height: 50px; background: #1a1a2e; }
+        .barcode-line.thin { width: 2px; }
+        .barcode-line.thick { width: 5px; }
+        .barcode-line.space { width: 4px; background: transparent; }
+        .boarding-code { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #666; letter-spacing: 3px; }
+        .validity-banner { background: var(--burgundy); color: white; text-align: center; padding: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 3px; }
+        .stub-header { text-align: center; padding-bottom: 15px; border-bottom: 1px solid #ddd; margin-bottom: 15px; }
+        .stub-airline { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--burgundy); font-weight: 700; letter-spacing: 2px; }
+        .stub-field { margin-bottom: 15px; }
+        .stub-label { font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: #888; letter-spacing: 1px; text-transform: uppercase; }
+        .stub-value { font-family: 'Playfair Display', serif; font-size: 14px; color: #1a1a2e; font-weight: 700; }
+        .stub-destination { font-size: 18px; color: var(--burgundy); }
+        .stub-qr { width: 80px; height: 80px; background: linear-gradient(90deg, #1a1a2e 50%, transparent 50%), linear-gradient(#1a1a2e 50%, transparent 50%); background-size: 8px 8px; margin: 15px auto; border: 3px solid #1a1a2e; padding: 5px; }
+        .fine-print { margin-top: 20px; padding: 15px; background: rgba(212, 175, 55, 0.1); border-radius: 8px; font-size: 10px; color: #666; line-height: 1.6; text-align: center; }
+        .close-coupon { position: absolute; top: -50px; right: 0; width: 40px; height: 40px; border: 2px solid var(--gold); border-radius: 50%; background: transparent; color: var(--gold); font-size: 24px; cursor: pointer; transition: all 0.3s ease; }
+        .close-coupon:hover { background: var(--gold); color: #1a1a2e; }
+        .sparkle { position: absolute; width: 10px; height: 10px; background: var(--gold); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+        .letter::-webkit-scrollbar { width: 8px; }
+        .letter::-webkit-scrollbar-track { background: var(--cream); }
+        .letter::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+        @media (max-width: 900px) {
+            .envelope { width: 400px; height: 280px; }
+            .letter { width: 90%; padding: 40px 50px; }
+            .boarding-pass { width: 90%; flex-direction: column; }
+            .boarding-main { border-radius: 15px 15px 0 0; }
+            .boarding-stub { border-radius: 0 0 15px 15px; border-left: none; border-top: 3px dashed #ccc; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="confetti-container" id="confetti"></div>
+    <div class="container">
+        <div class="envelope-wrapper" id="envelope-wrapper">
+            <div class="envelope">
+                <div class="envelope-body"></div>
+                <div class="envelope-flap" id="envelope-flap"></div>
+                <div class="wax-seal"><span>CG</span></div>
+            </div>
+            <div class="envelope-hint">¡CLIC PARA ABRIR!</div>
+        </div>
+    </div>
+    <div class="scroll-indicator" id="scroll-indicator">
+        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+        <div class="scroll-text">Scroll</div>
+        <div class="scroll-arrows">
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+    <div class="letter-container" id="letter-container">
+        <div class="letter" id="letter">
+            <div class="letter-header">
+                <div class="age-badge">79</div>
+                <h1 class="letter-title">¡Feliz Cumpleaños!</h1>
+                <h2 class="letter-subtitle">Carlos Goldberger</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="letter-content">
+                <p>Querido Carlos, hoy celebramos algo verdaderamente extraordinario: <span class="highlight">79 años</span> de vida, sabiduría, aventuras, y probablemente de intentar explicarle a la familia cómo funcionaba el mundo antes del WiFi. ¡Y lo mejor de todo es que sigues aquí para contarlo!</p>
+                <div class="funny-note">
+                    💡 <strong>Dato curioso:</strong> A los 79 años, has dado aproximadamente 28,835 vueltas al sol. Eso es más vueltas que las que da uno buscando estacionamiento en el centro. ¡Impresionante!
+                </div>
+                <p>Queremos que sepas que cada momento compartido contigo ha sido un regalo. Tus consejos (aunque a veces no pedidos), tu humor (especialmente el que solo tú entiendes), y tu capacidad de hacer que cualquier reunión familiar sea memorable.</p>
+                <div class="photo-gallery">
+                    <div class="photo-frame">
+                        <img src="1.jpeg" alt="Foto de Carlos" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="photo-placeholder" style="display:none;"><span>📷</span>Foto 1</div>
+                    </div>
+                    <div class="photo-frame">
+                        <img src="2.png" alt="Foto de Carlos" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="photo-placeholder" style="display:none;"><span>📸</span>Foto 2</div>
+                    </div>
+                    <div class="photo-frame">
+                        <img src="3.jpeg" alt="Foto de Carlos" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="photo-placeholder" style="display:none;"><span>🖼️</span>Foto 3</div>
+                    </div>
+                </div>
+                <p><span class="highlight">79 años</span> de hacer reír, de amar incondicionalmente, y de demostrar que la mejor medicina es una buena comida y mejor compañía. Este año, hemos decidido darte algo que realmente mereces. Algo tan grande como tu corazón y tan aventurero como tu espíritu...</p>
+            </div>
+            <div class="signatures">
+                <p class="with-love">Con todo nuestro amor y admiración,</p>
+                <span class="signature">Freddy</span>
+                <span class="signature">Natan</span>
+                <span class="signature">Ariel</span>
+            </div>
+            <div class="gift-section">
+                <p class="gift-teaser">🎁 Pero espera... ¡Hay más! 🎁</p>
+                <button class="gift-button" id="gift-button">Abrir Regalo Especial</button>
+            </div>
+            <div class="gift-section-end">
+                <span class="end-flourish">✦ Con amor infinito ✦</span>
+            </div>
+        </div>
+    </div>
+    <div class="coupon-overlay" id="coupon-overlay">
+        <div class="boarding-pass" id="coupon">
+            <button class="close-coupon" id="close-coupon">×</button>
+            <div class="boarding-main">
+                <div class="airline-header">
+                    <div class="airline-logo">
+                        <span class="airline-icon">✈️</span>
+                        <span class="airline-name">GOLDBERGER AIRLINES</span>
+                    </div>
+                    <span class="boarding-label">BOARDING PASS</span>
+                </div>
+                <div class="passenger-tribute">
+                    <span class="tribute-text">Un viaje para el mejor abuelo, padre y leyenda</span>
+                </div>
+                <div class="boarding-content">
+                    <div class="boarding-row">
+                        <div class="boarding-field">
+                            <div class="field-label">Pasajero / Passenger</div>
+                            <div class="field-value large">CARLOS GOLDBERGER</div>
+                        </div>
+                    </div>
+                    <div class="boarding-row">
+                        <div class="boarding-field">
+                            <div class="field-label">Desde / From</div>
+                            <div class="field-value">TU CASA</div>
+                        </div>
+                        <div class="boarding-field" style="text-align: center;">
+                            <div style="font-size: 40px; color: var(--burgundy);">→</div>
+                        </div>
+                        <div class="boarding-field" style="text-align: right;">
+                            <div class="field-label">Destino / To</div>
+                            <div class="field-value destination">¡CUALQUIER LUGAR DEL MUNDO!</div>
+                        </div>
+                    </div>
+                    <hr class="boarding-divider">
+                    <div class="boarding-row">
+                        <div class="boarding-field">
+                            <div class="field-label">Fecha / Date</div>
+                            <div class="field-value">CUANDO QUIERAS</div>
+                        </div>
+                        <div class="boarding-field" style="text-align: center;">
+                            <div class="field-label">Vuelo / Flight</div>
+                            <div class="field-value">CG-79</div>
+                        </div>
+                        <div class="boarding-field" style="text-align: right;">
+                            <div class="field-label">Asiento / Seat</div>
+                            <div class="field-value">VIP ⭐</div>
+                        </div>
+                    </div>
+                    <div class="barcode">
+                        <div class="barcode-line thick"></div><div class="barcode-line thin"></div><div class="barcode-line"></div><div class="barcode-line space"></div>
+                        <div class="barcode-line thick"></div><div class="barcode-line thin"></div><div class="barcode-line"></div><div class="barcode-line thin"></div><div class="barcode-line space"></div>
+                        <div class="barcode-line"></div><div class="barcode-line thick"></div><div class="barcode-line thin"></div><div class="barcode-line"></div><div class="barcode-line space"></div>
+                        <div class="barcode-line thin"></div><div class="barcode-line thick"></div><div class="barcode-line"></div><div class="barcode-line thin"></div><div class="barcode-line space"></div>
+                        <div class="barcode-line"></div><div class="barcode-line thin"></div><div class="barcode-line thick"></div><div class="barcode-line"></div><div class="barcode-line space"></div>
+                        <div class="barcode-line thin"></div><div class="barcode-line"></div><div class="barcode-line thick"></div><div class="barcode-line thin"></div>
+                    </div>
+                    <div class="boarding-code">CARLOS-79-VIP-∞</div>
+                </div>
+                <div class="validity-banner">★ VÁLIDO PARA SIEMPRE • SIN EXPIRACIÓN • NO EXPIRA NUNCA ★</div>
+            </div>
+            <div class="boarding-stub">
+                <div class="stub-header"><div class="stub-airline">GOLDBERGER<br>AIRLINES</div></div>
+                <div class="stub-field"><div class="stub-label">Pasajero</div><div class="stub-value">C. GOLDBERGER</div></div>
+                <div class="stub-field"><div class="stub-label">Destino</div><div class="stub-value stub-destination">MUNDO</div></div>
+                <div class="stub-field"><div class="stub-label">Vuelo</div><div class="stub-value">CG-79</div></div>
+                <div class="stub-field"><div class="stub-label">Fecha</div><div class="stub-value">∞</div></div>
+                <div class="stub-qr"></div>
+                <div class="fine-print">* Canjeable por un vuelo a cualquier destino del planeta Tierra<br>* No caduca porque el amor tampoco caduca<br>* Aplican abrazos obligatorios</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.width = (Math.random() * 3 + 1) + 'px';
+                star.style.height = star.style.width;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#D4AF37', '#722F37', '#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-20px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                if (Math.random() > 0.5) confetti.style.borderRadius = '50%';
+                confettiContainer.appendChild(confetti);
+                gsap.to(confetti, {
+                    y: window.innerHeight + 100,
+                    x: (Math.random() - 0.5) * 400,
+                    rotation: Math.random() * 720,
+                    opacity: 1,
+                    duration: Math.random() * 3 + 2,
+                    delay: Math.random() * 0.5,
+                    ease: 'power1.out',
+                    onComplete: () => confetti.remove()
+                });
+            }
+        }
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        const letter = document.getElementById('letter');
+        function checkScroll() {
+            if (letter.scrollHeight > letter.clientHeight) {
+                const scrollPercentage = letter.scrollTop / (letter.scrollHeight - letter.clientHeight);
+                if (scrollPercentage < 0.9) {
+                    scrollIndicator.classList.add('visible');
+                } else {
+                    scrollIndicator.classList.remove('visible');
+                }
+            }
+        }
+        letter.addEventListener('scroll', checkScroll);
+        const envelopeWrapper = document.getElementById('envelope-wrapper');
+        const envelopeFlap = document.getElementById('envelope-flap');
+        const letterContainer = document.getElementById('letter-container');
+        envelopeWrapper.addEventListener('click', () => {
+            envelopeFlap.classList.add('open');
+            createConfetti();
+            gsap.timeline()
+                .to(envelopeWrapper, { y: -50, scale: 0.9, duration: 0.5, delay: 0.3, ease: 'power2.in' })
+                .to(envelopeWrapper, { opacity: 0, duration: 0.3 })
+                .set(letterContainer, { opacity: 1, pointerEvents: 'all' })
+                .to(letter, { y: 0, scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.2)', onComplete: () => setTimeout(checkScroll, 500) });
+        });
+        const giftButton = document.getElementById('gift-button');
+        const couponOverlay = document.getElementById('coupon-overlay');
+        const coupon = document.getElementById('coupon');
+        const closeCoupon = document.getElementById('close-coupon');
+        giftButton.addEventListener('click', () => {
+            scrollIndicator.classList.remove('visible');
+            createConfetti();
+            couponOverlay.classList.add('visible');
+            gsap.to(coupon, { scale: 1, rotateY: 0, opacity: 1, duration: 1, ease: 'back.out(1.5)' });
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = 50 + (Math.random() - 0.5) * 60 + '%';
+                sparkle.style.top = 50 + (Math.random() - 0.5) * 60 + '%';
+                couponOverlay.appendChild(sparkle);
+                gsap.fromTo(sparkle, { scale: 0, opacity: 1 }, { scale: Math.random() * 2 + 1, opacity: 0, duration: Math.random() * 1 + 0.5, delay: Math.random() * 0.5, ease: 'power2.out', onComplete: () => sparkle.remove() });
+            }
+        });
+        closeCoupon.addEventListener('click', () => {
+            gsap.to(coupon, { scale: 0.5, rotateY: 90, opacity: 0, duration: 0.5, ease: 'power2.in', onComplete: () => { couponOverlay.classList.remove('visible'); checkScroll(); } });
+        });
+        couponOverlay.addEventListener('click', (e) => { if (e.target === couponOverlay) closeCoupon.click(); });
+        gsap.from(envelopeWrapper, { y: 100, opacity: 0, duration: 1.5, ease: 'elastic.out(1, 0.5)', delay: 0.5 });
+        gsap.from('.wax-seal', { scale: 0, rotation: 180, duration: 0.8, ease: 'back.out(2)', delay: 1.2 });
+        gsap.from('.envelope-hint', { opacity: 0, y: 20, duration: 0.5, delay: 1.8 });
+    </script>
+</body>
+</html>
